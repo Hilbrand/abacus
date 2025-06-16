@@ -1,5 +1,5 @@
 use axum::extract::FromRef;
-use sqlx::{SqlitePool, query, query_as};
+use sqlx::{Error, SqlitePool, query, query_as};
 
 use super::structs::{PollingStation, PollingStationRequest};
 use crate::AppState;
@@ -13,7 +13,7 @@ impl PollingStations {
     }
 
     /// List all polling stations from an election
-    pub async fn list(&self, election_id: u32) -> Result<Vec<PollingStation>, sqlx::Error> {
+    pub async fn list(&self, election_id: u32) -> Result<Vec<PollingStation>, Error> {
         query_as!(
             PollingStation,
             r#"
@@ -37,7 +37,7 @@ impl PollingStations {
     }
 
     /// Get a single polling station
-    pub async fn get(&self, id: u32) -> Result<PollingStation, sqlx::Error> {
+    pub async fn get(&self, id: u32) -> Result<PollingStation, Error> {
         query_as!(
             PollingStation,
             r#"
@@ -65,7 +65,7 @@ impl PollingStations {
         &self,
         election_id: u32,
         id: u32,
-    ) -> Result<PollingStation, sqlx::Error> {
+    ) -> Result<PollingStation, Error> {
         query_as!(
             PollingStation,
             r#"
@@ -94,7 +94,7 @@ impl PollingStations {
         &self,
         election_id: u32,
         new_polling_station: PollingStationRequest,
-    ) -> Result<PollingStation, sqlx::Error> {
+    ) -> Result<PollingStation, Error> {
         query_as!(
             PollingStation,
             r#"
@@ -138,7 +138,7 @@ impl PollingStations {
         election_id: u32,
         polling_station_id: u32,
         polling_station_update: PollingStationRequest,
-    ) -> Result<bool, sqlx::Error> {
+    ) -> Result<bool, Error> {
         let rows_affected = query!(
             r#"
             UPDATE polling_stations
@@ -171,7 +171,7 @@ impl PollingStations {
     }
 
     /// Delete a single polling station for an election
-    pub async fn delete(&self, election_id: u32, id: u32) -> Result<bool, sqlx::Error> {
+    pub async fn delete(&self, election_id: u32, id: u32) -> Result<bool, Error> {
         let rows_affected = query!(
             r#"DELETE FROM polling_stations WHERE id = ? AND election_id = ?"#,
             id,
