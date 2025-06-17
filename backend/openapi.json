@@ -328,7 +328,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ElectionDefinitionImportRequest"
+                "$ref": "#/components/schemas/ElectionAndCandidatesDefinitionImportRequest"
               }
             }
           },
@@ -386,7 +386,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ElectionDefinitionValidateRequest"
+                "$ref": "#/components/schemas/ElectionAndCandidateDefinitionValidateRequest"
               }
             }
           },
@@ -3654,6 +3654,64 @@
           }
         }
       },
+      "ElectionAndCandidateDefinitionValidateRequest": {
+        "type": "object",
+        "required": [
+          "election_data"
+        ],
+        "properties": {
+          "candidate_data": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "candidate_hash": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "election_data": {
+            "type": "string"
+          },
+          "election_hash": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "ElectionAndCandidatesDefinitionImportRequest": {
+        "type": "object",
+        "required": [
+          "election_hash",
+          "election_data",
+          "candidate_hash",
+          "candidate_data"
+        ],
+        "properties": {
+          "candidate_data": {
+            "type": "string"
+          },
+          "candidate_hash": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "election_data": {
+            "type": "string"
+          },
+          "election_hash": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
       "ElectionApportionmentResponse": {
         "type": "object",
         "description": "Election apportionment response, including the seat assignment, candidate nomination and election summary",
@@ -3680,41 +3738,6 @@
         "enum": [
           "Municipal"
         ]
-      },
-      "ElectionDefinitionImportRequest": {
-        "type": "object",
-        "required": [
-          "hash",
-          "data"
-        ],
-        "properties": {
-          "data": {
-            "type": "string"
-          },
-          "hash": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      },
-      "ElectionDefinitionValidateRequest": {
-        "type": "object",
-        "required": [
-          "data"
-        ],
-        "properties": {
-          "data": {
-            "type": "string"
-          },
-          "hash": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
       },
       "ElectionDefinitionValidateResponse": {
         "type": "object",

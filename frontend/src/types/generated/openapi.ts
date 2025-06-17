@@ -30,12 +30,12 @@ export type ELECTION_CREATE_REQUEST_BODY = NewElection;
 // /api/elections/import
 export type ELECTION_IMPORT_REQUEST_PARAMS = Record<string, never>;
 export type ELECTION_IMPORT_REQUEST_PATH = `/api/elections/import`;
-export type ELECTION_IMPORT_REQUEST_BODY = ElectionDefinitionImportRequest;
+export type ELECTION_IMPORT_REQUEST_BODY = ElectionAndCandidatesDefinitionImportRequest;
 
 // /api/elections/import/validate
 export type ELECTION_IMPORT_VALIDATE_REQUEST_PARAMS = Record<string, never>;
 export type ELECTION_IMPORT_VALIDATE_REQUEST_PATH = `/api/elections/import/validate`;
-export type ELECTION_IMPORT_VALIDATE_REQUEST_BODY = ElectionDefinitionValidateRequest;
+export type ELECTION_IMPORT_VALIDATE_REQUEST_BODY = ElectionAndCandidateDefinitionValidateRequest;
 
 // /api/elections/{election_id}
 export interface ELECTION_DETAILS_REQUEST_PARAMS {
@@ -481,6 +481,20 @@ export interface Election {
   number_of_voters: number;
 }
 
+export interface ElectionAndCandidateDefinitionValidateRequest {
+  candidate_data?: string | null;
+  candidate_hash?: string[];
+  election_data: string;
+  election_hash?: string[];
+}
+
+export interface ElectionAndCandidatesDefinitionImportRequest {
+  candidate_data: string;
+  candidate_hash: string[];
+  election_data: string;
+  election_hash: string[];
+}
+
 /**
  * Election apportionment response, including the seat assignment, candidate nomination and election summary
  */
@@ -494,16 +508,6 @@ export interface ElectionApportionmentResponse {
  * Election category (limited for now)
  */
 export type ElectionCategory = "Municipal";
-
-export interface ElectionDefinitionImportRequest {
-  data: string;
-  hash: string[];
-}
-
-export interface ElectionDefinitionValidateRequest {
-  data: string;
-  hash?: string[];
-}
 
 export interface ElectionDefinitionValidateResponse {
   election: NewElection;
