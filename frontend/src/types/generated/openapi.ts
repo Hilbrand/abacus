@@ -351,7 +351,6 @@ export interface CommitteeSession {
 export interface CommitteeSessionCreateRequest {
   election_id: number;
   number: number;
-  status: CommitteeSessionStatus;
 }
 
 export interface CommitteeSessionDetails {
