@@ -3124,9 +3124,6 @@
           "id",
           "number",
           "election_id",
-          "location",
-          "start_date",
-          "start_time",
           "status"
         ],
         "properties": {
@@ -3141,7 +3138,10 @@
             "minimum": 0
           },
           "location": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "number": {
             "type": "integer",
@@ -3149,10 +3149,16 @@
             "minimum": 0
           },
           "start_date": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "start_time": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "status": {
             "$ref": "#/components/schemas/CommitteeSessionStatus"
@@ -3185,9 +3191,6 @@
           "sessionId",
           "sessionNumber",
           "sessionElectionId",
-          "sessionLocation",
-          "sessionStartDate",
-          "sessionStartTime",
           "sessionStatus"
         ],
         "properties": {
@@ -3202,7 +3205,10 @@
             "minimum": 0
           },
           "sessionLocation": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "sessionNumber": {
             "type": "integer",
@@ -3210,10 +3216,16 @@
             "minimum": 0
           },
           "sessionStartDate": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "sessionStartTime": {
-            "type": "string"
+            "type": [
+              "string",
+              "null"
+            ]
           },
           "sessionStatus": {
             "type": "string"
@@ -3239,10 +3251,10 @@
         "type": "string",
         "description": "Committee session status",
         "enum": [
-          "Created",
-          "DataEntryInProgress",
-          "DataEntryPaused",
-          "DataEntryFinished"
+          "created",
+          "data_entry_in_progress",
+          "data_entry_paused",
+          "data_entry_finished"
         ]
       },
       "CommitteeSessionUpdateRequest": {
